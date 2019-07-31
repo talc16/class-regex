@@ -20,6 +20,11 @@ const passwordRegex = new RegExp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$");
 // passwordRegex.test("1q2w3e4r")
 // passwordRegex.test("1Q2w3e4r")
 
+
+let name = false;
+let pass1 = false;
+let pass2 = false;
+
 const form = document.getElementById("formValidation");
 const DOM = {
     userName: form.querySelector("input[name=userName]"),
@@ -37,23 +42,38 @@ console.log(DOM);
 DOM.userName.addEventListener("input", function(event) {
     resetErrors();
     const { value } = event.currentTarget;
-    if (!value) return raiseMessage(DOM.error, "Input Is Required"), "red";
+    if (!value) {
+        name = false;
+        return raiseMessage(DOM.emailMessage, "Input Is Required", "red");
+    }
     const emailValidationResult = validateEmail(value);
     // if (!emailValidationResult) return raiseMessage(DOM.error, "Its not an email", "red");
-    if (!emailValidationResult) return raiseMessage(DOM.emailMessage, "Its not an email", "red")
-    return raiseMessage(DOM.emailMessage, "You are ok!", "green");
+    if (!emailValidationResult) {
+        name = false
+        return raiseMessage(DOM.emailMessage, "Its not an email", "red")
+    } else {
+        name = true
+        return raiseMessage(DOM.emailMessage, "You are ok!", "green");
+    }
+
 });
 
 DOM.firstPassword.addEventListener("input", function(event) {
     resetErrors();
     const { value } = event.currentTarget;
-    if (!value) return raiseMessage(DOM.firsePasswordMessage, "Input Is Required", "red");
+    if (!value) {
+        pass1 = false
+        return raiseMessage(DOM.firsePasswordMessage, "Input Is Required", "red");
+    }
     const passValResult = valPassword(value);
     if (!passValResult) {
         DOM.secPasswordDiv.style.visibility = "hidden";
+        pass1 = false
         return raiseMessage(DOM.firsePasswordMessage, "Plaease enter a 8 digit password includin at least one upper-case letter, one number and one lower case letter", "red")
+
     } else {
         DOM.secPasswordDiv.style.visibility = "visible";
+        pass1 = true
         return raiseMessage(DOM.firsePasswordMessage, "Strong password", "green");
     }
 });
@@ -61,10 +81,18 @@ DOM.firstPassword.addEventListener("input", function(event) {
 DOM.secPassword.addEventListener("input", function(event) {
     resetErrors();
     const { value } = event.currentTarget;
-    if (!value) return raiseMessage(DOM.secPasswordMessage, "Input Is Required", "red");
+    if (!value) {
+        pass2 = false
+        return raiseMessage(DOM.secPasswordMessage, "Input Is Required", "red");
+    }
     let firstPassInput = DOM.firstPassword.value;
-    if (value !== firstPassInput) return raiseMessage(DOM.secPasswordMessage, "no match", "red");
-    return raiseMessage(DOM.secPasswordMessage, "perfect match!", "green");
+    if (value !== firstPassInput) {
+        pass2 = false
+        return raiseMessage(DOM.secPasswordMessage, "no match", "red");
+    } else {
+        pass2 = true
+        return raiseMessage(DOM.secPasswordMessage, "perfect match!", "green");
+    }
 
 
 });
@@ -90,4 +118,15 @@ function validateEmail(input) {
 function raiseMessage(element, message, color) {
     element.innerHTML = message;
     element.style.color = color;
+}
+
+
+function validateForm() {
+    var x = document.forms["myForm"]["userName"].value;
+    var y = document.forms["myForm"]["firstPassword"].value;
+    var z = document.forms["myForm"]["secPassword"].value;
+    if ((!name || !pass1 || !pass2)) {
+        alert("form must be filled out currectly");
+        return false;
+    }
 }

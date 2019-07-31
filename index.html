@@ -11,7 +11,7 @@
 
 <body>
     <div style="height:200px;width:300px;text-align: center;margin:auto;border:1px solid black">
-        <form id="formValidation">
+        <form id="formValidation" name="myForm" onsubmit="return validateForm()">
             <div id="userName">
                 <span>Enter your email</span>
                 <br />
@@ -35,6 +35,7 @@
                 <br />
                 <span id="secPasswordMessage"> </span>
             </div>
+            <button type="submit"> send </button>
         </form>
     </div>
 
