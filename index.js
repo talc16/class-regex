@@ -6,12 +6,12 @@
 //to validate the input we will use test method
 
 const numbersRegex = new RegExp('^[0-9]+$')
-numbersRegex.test("sdgdsfd")// false
-numbersRegex.test("45454")// true
+numbersRegex.test("sdgdsfd") // false
+numbersRegex.test("45454") // true
 
 const lpRegex = new RegExp('^[A-Z]{1,3}-[A-Z]{1,2}-[0-9]{1,4}$')
-lpRegex.test("A-A-343")// true
-lpRegex.test("A-A-454555")// false
+lpRegex.test("A-A-343") // true
+lpRegex.test("A-A-454555") // false
 
 
 const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -26,23 +26,26 @@ const DOM = {
 console.log(DOM)
 
 
-DOM.userName.addEventListener("input", function (event) {
+DOM.userName.addEventListener("input", function(event) {
     resetErrors()
     const { value } = event.currentTarget
-    if (!value) return raiseMessage(DOM.error, "Input Is Required")
+    if (!value) return raiseMessage(DOM.error, "Input Is Required", "red")
     const emailValidationResult = validateEmail(value)
-    if (!emailValidationResult) return raiseMessage(DOM.error, "Its not an email")
-    return raiseMessage(DOM.success, "You are ok!")
+    if (!emailValidationResult) return raiseMessage(DOM.error, "Its not an email", "red")
+    return raiseMessage(DOM.success, "You are ok!", "green")
 })
+
 function resetErrors() {
     const { error, success } = DOM;
     error.innerHTML = "";
     success.innerHTML = "";
 }
+
 function validateEmail(input) {
     return emailRegex.test(input.toLowerCase())
 }
 
-function raiseMessage(element, message) {
+function raiseMessage(element, message, color) {
     element.innerHTML = message
+    element.style.color = color
 }

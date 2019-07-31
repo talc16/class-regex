@@ -2,28 +2,43 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
 </head>
 
 <body>
-
     <div style="height:200px;width:300px;text-align: center;margin:auto;border:1px solid black">
         <form id="formValidation">
-            <span>Enter your email</span>
-            <br>
-            <input type="text" name="userName" />
-            <br>
-            <span style="color:red" id="error"> </span>
-            <span style="color:green" id="success"> </span>
+            <div id="userName">
+                <span>Enter your email</span>
+                <br />
+                <input type="text" name="userName" />
+                <br />
+                <span id="error"> </span>
+                <span id="success"> </span>
+            </div>
+
+            <div id="firstPassword">
+                <span>Enter Password</span>
+                <br />
+                <input type="password" name="firstPassword" />
+                <br />
+                <span id="firstPasswordMessage"> </span>
+            </div>
+            <div id="secPassword">
+                <span>Enter password again</span>
+                <br />
+                <input type="password" name="secPassword" />
+                <br />
+                <span id="secPasswordMessage"> </span>
+            </div>
         </form>
     </div>
 
-
-
-    <script src="index.js"></script>
+    <script src="index2.js"></script>
 </body>
 
 </html>
